@@ -1,12 +1,14 @@
 require 'nokogiri'
+require 'open-uri'
 require 'pry'
 # Lets scrape it with nokogiri first...
 
 class LevelTwo
-  attr_reader :url
+  def url_data
+    Nokogiri::HTML(open('http://www.pythonchallenge.com/pc/def/ocr.html'))
+  end
 
-  def iniitalize
-    @url = Nokogiri::HTML("http://www.pythonchallenge.com/pc/def/ocr.html")
-    Nokogiri::HTML(open("index.html"))
+  def main_data
+    url_data.to_s.split('-->')[-2]
   end
 end
