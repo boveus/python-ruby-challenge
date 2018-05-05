@@ -1,5 +1,3 @@
-require 'pry'
-
 class LevelOne
    def initialize(input_string)
      input_letters = input_string.chars
