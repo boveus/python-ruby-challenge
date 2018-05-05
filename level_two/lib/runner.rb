@@ -1,3 +1,3 @@
 require './level_two/lib/level_two'
 
-puts LevelTwo.new.main_data
+puts LevelTwo.new.unique_chars

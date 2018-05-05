@@ -8,7 +8,11 @@ class LevelTwo
     Nokogiri::HTML(open('http://www.pythonchallenge.com/pc/def/ocr.html'))
   end
 
-  def main_data
+  def target_data
     url_data.to_s.split('-->')[-2]
+  end
+
+  def unique_chars
+    target_data.chars.uniq.join('')
   end
 end
