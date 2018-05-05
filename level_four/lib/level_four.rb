@@ -1,8 +1,13 @@
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
 # http://www.pythonchallenge.com/pc/def/linkedlist.php
 
 class LevelFour
+  def initialize
+    get_next
+  end
+
   def url_data
     Nokogiri::HTML(open('http://www.pythonchallenge.com/pc/def/linkedlist.php'))
   end
@@ -28,15 +33,20 @@ class LevelFour
 
   def get_next(nothing_number = first_nothing)
     next_nothing, next_nothing_message = handle_nothing_response(nothing_number)
-    if next_nothing_message == 'and the next nothing is'
-      get_next(next_nothing)
-    elsif next_nothing_message == 'Your hands are getting tired and the next nothing is'
+    if next_nothing.to_i == 16044
+      get_next(divide_by_two(next_nothing))
+    elsif continue_responses.include?(next_nothing_message)
       get_next(next_nothing)
     else
-      next_nothing_message + ' ' + next_nothing
+      puts next_nothing_message + ' ' + next_nothing
     end
   end
 
-  def matches
+  def divide_by_two(nothing)
+    (nothing.to_i / 2).to_s
+  end
+
+  def continue_responses
+    ['and the next nothing is', 'Your hands are getting tired and the next nothing is', 'There maybe misleading numbers in the text. One example is 82683. Look only for the next nothing and the next nothing is']
   end
 end
