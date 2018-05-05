@@ -5,3 +5,5 @@ puts '----original-----'
 puts sample
 puts '-----new one-----'
 LevelOne.new(sample)
+puts '----solution----'
+LevelOne.new('map')
