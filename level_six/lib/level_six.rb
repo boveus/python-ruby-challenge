@@ -30,5 +30,7 @@ class LevelSix
     binding.pry
     return next_nothing, next_message
   end
-
+# This is gonna get ugly...
+#  mdls 270.txt | grep kMDItemFinderComment
+# >> kMDItemFinderComment               = "this is my comment"
 end
