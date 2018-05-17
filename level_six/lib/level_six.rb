@@ -16,21 +16,23 @@ class LevelSix
   end
 
   def open_next(nothing = first_nothing)
-    next_nothing, next_message = parse_nothing(nothing)
-    puts "#{next_message} #{next_nothing}"
+    next_nothing, next_message, comment = parse_nothing(nothing)
+    print "#{comment}"
     if next_message == 'Next nothing is'
       open_next(next_nothing)
     end
   end
 
-  def parse_nothing(nothing)
-    next_nothing = File.read("./level_six/data/channel/#{nothing}.txt").split(' ').last
-    next_message = File.read("./level_six/data/channel/#{nothing}.txt").split(' ')[0..-2].join(' ')
-    puts File.open("./level_six/data/channel/#{nothing}.txt")
-    binding.pry
-    return next_nothing, next_message
+  def parse_file_comment(file_name)
+    result = `mdls "#{file_name}" | grep kMDItemFinderComment`
+    result.split('=').last
   end
-# This is gonna get ugly...
-#  mdls 270.txt | grep kMDItemFinderComment
-# >> kMDItemFinderComment               = "this is my comment"
+
+  def parse_nothing(nothing)
+    file = "./level_six/data/channel/#{nothing}.txt"
+    next_nothing = File.read("#{file}").split(' ').last
+    next_message = File.read("#{file}").split(' ')[0..-2].join(' ')
+    comment = parse_file_comment(file)
+    return next_nothing, next_message, comment
+  end
 end
